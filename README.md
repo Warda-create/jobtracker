@@ -60,7 +60,8 @@ I am still learning, so the code might not be perfect. I got stuck implementing 
 
 ## Demo (live)
 
-- [https://github.com/Warda-create/jobtracker](https://github.com/Warda-create/jobtracker)
+- **Live app (GitHub Pages):** [https://warda-create.github.io/jobtracker/](https://warda-create.github.io/jobtracker/)
+- **Repository:** [https://github.com/Warda-create/jobtracker](https://github.com/Warda-create/jobtracker)
 
 ---
 
