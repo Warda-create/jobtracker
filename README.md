@@ -40,8 +40,6 @@ I am still learning, so the code might not be perfect. I got stuck implementing 
 
 ## Screenshots & demos
 
-These files live in the [`assets/`](assets/) folder in this repo.
-
 ### Dashboard
 
 ![Dashboard overview](assets/dashboard.png)
@@ -62,11 +60,7 @@ These files live in the [`assets/`](assets/) folder in this repo.
 
 ## Demo (live)
 
-After you publish with GitHub Pages, replace the URL below with yours:
-
-```text
-https://yourusername.github.io/job-tracker/
-```
+- [https://github.com/Warda-create/jobtracker](https://github.com/Warda-create/jobtracker)
 
 ---
 
@@ -89,7 +83,7 @@ https://yourusername.github.io/job-tracker/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/job-tracker.git
+   git clone https://github.com/Warda-create/jobtracker.git
    ```
 2. Open `index.html` in your browser.
 3. Use the app to start adding and tracking your jobs.
@@ -100,11 +94,11 @@ https://yourusername.github.io/job-tracker/
 ## Project structure
 
 ```text
-job-tracker/
-├── index.html      # Main page
-├── app.js          # App logic & localStorage
-├── style.css       # Custom styles (Bootstrap + small overrides)
-├── assets/         # Screenshots & GIF demos for the README
+jobtracker/
+├── index.html
+├── app.js
+├── style.css
+├── assets/
 │   ├── dashboard.png
 │   ├── addingnewjob.gif
 │   ├── editingjob.gif
