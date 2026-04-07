@@ -1,0 +1,87 @@
+/* ── Card entry animation ──────────────────────────────────────────────── */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ 
+.job-card {
+  animation: cardFadeIn 0.35s ease both;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+.job-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+ 
+/* ── Stat boxes ─────────────────────────────────────────────────────────── */
+.stat-box {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+.stat-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
+}
+ 
+/* ── Filter buttons ─────────────────────────────────────────────────────── */
+.filter-btn {
+  transition: all 0.15s ease;
+}
+ 
+/* ── Status badges ──────────────────────────────────────────────────────── */
+[class*="status-badge-"] {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--bs-border-radius-pill);
+  transition: opacity 0.2s ease;
+}
+ 
+.status-badge-applied   { background-color: var(--bs-primary); color: var(--bs-white); }
+.status-badge-interview { background-color: var(--bs-warning);  color: var(--bs-dark); }
+.status-badge-offer     { background-color: var(--bs-success);  color: var(--bs-white); }
+.status-badge-rejected  { background-color: var(--bs-danger);   color: var(--bs-white); }
+ 
+/* ── Dark mode ──────────────────────────────────────────────────────────── */
+.dark-mode {
+  background-color: #1a1d23 !important;
+  color: #e2e8f0;
+}
+ 
+.dark-mode .card,
+.dark-mode .modal-content {
+  background-color: #242830;
+  color: #e2e8f0;
+}
+ 
+.dark-mode .text-muted,
+.dark-mode .text-secondary { color: #94a3b8 !important; }
+ 
+.dark-mode .form-control,
+.dark-mode .form-select {
+  background-color: #2e3340;
+  border-color: #3d4454;
+  color: #e2e8f0;
+}
+ 
+/* ── Dark mode toggle button ────────────────────────────────────────────── */
+#darkModeToggle {
+  width: 44px;
+  height: 44px;
+  font-size: 1.1rem;
+  border: none;
+  transition: transform 0.2s ease;
+}
+ 
+#darkModeToggle:hover {
+  transform: scale(1.1);
+}

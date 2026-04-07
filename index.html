@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Job Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-body-secondary min-vh-100">
+
+  <!-- HEADER -->
+  <header class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient border-bottom border-white border-opacity-25 shadow">
+    <div class="container py-4 py-lg-4">
+      <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center justify-content-between w-100 gap-4">
+        <div class="d-flex align-items-start gap-3 gap-md-4 min-w-0">
+          <div class="flex-shrink-0 rounded-3 bg-white bg-opacity-10 p-2 p-sm-3 shadow-sm d-flex align-items-center justify-content-center border border-white border-opacity-25">
+            <i class="bi bi-clipboard2-check fs-2 fs-md-1 text-white" aria-hidden="true"></i>
+          </div>
+          <div class="min-w-0 pt-sm-1">
+            <p class="small text-uppercase text-white-50 fw-semibold mb-1 mb-sm-2">Dashboard</p>
+            <h1 class="fw-bold mb-1 text-white fs-4 fs-md-3">Job Tracker</h1>
+            <p class="mb-0 small text-white-50 lh-sm">Track every application in one place</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center align-self-stretch align-self-sm-center">
+          <button type="button" class="btn btn-light fw-semibold px-4 py-2 py-sm-3 rounded-pill shadow-sm w-100 w-sm-auto" id="openModalBtn">
+            <i class="bi bi-plus-lg me-2" aria-hidden="true"></i>
+            Add New Job
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-4 py-md-5">
+
+    <!-- STATS ROW -->
+    <div class="row g-3 g-md-4 mb-4" id="statsRow">
+      <div class="col-6 col-md-3">
+        <div class="stat-box h-100 rounded-4 shadow-sm bg-primary bg-opacity-10 border border-primary border-opacity-25 p-3 d-flex flex-column justify-content-center align-items-center">
+          <div class="fs-2 fw-bold text-primary lh-1 mb-1" id="countApplied">0</div>
+          <div class="small text-secondary">Applied</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-box h-100 rounded-4 shadow-sm bg-warning bg-opacity-10 border border-warning border-opacity-25 p-3 d-flex flex-column justify-content-center align-items-center">
+          <div class="fs-2 fw-bold text-warning-emphasis lh-1 mb-1" id="countInterview">0</div>
+          <div class="small text-secondary">Interview</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-box h-100 rounded-4 shadow-sm bg-success bg-opacity-10 border border-success border-opacity-25 p-3 d-flex flex-column justify-content-center align-items-center">
+          <div class="fs-2 fw-bold text-success lh-1 mb-1" id="countOffer">0</div>
+          <div class="small text-secondary">Offer</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-box h-100 rounded-4 shadow-sm bg-danger bg-opacity-10 border border-danger border-opacity-25 p-3 d-flex flex-column justify-content-center align-items-center">
+          <div class="fs-2 fw-bold text-danger lh-1 mb-1" id="countRejected">0</div>
+          <div class="small text-secondary">Rejected</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH + SORT + FILTERS -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+      <div class="card-body p-3 p-md-4">
+        <div class="row g-2 g-md-3 align-items-stretch align-items-md-end mb-3">
+          <div class="col-12 col-md-7">
+            <label for="searchInput" class="form-label small fw-semibold text-secondary mb-1">Search</label>
+            <div class="input-group">
+              <span class="input-group-text bg-body-secondary border-end-0"><i class="bi bi-search text-secondary" aria-hidden="true"></i></span>
+              <input type="text" id="searchInput" class="form-control border-start-0 ps-0" placeholder="Company or role…"/>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="sortSelect" class="form-label small fw-semibold text-secondary mb-1">Sort</label>
+            <select id="sortSelect" class="form-select">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="company">Company A–Z</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-2">
+            <label class="form-label small fw-semibold text-secondary mb-1 d-none d-md-block">&nbsp;</label>
+            <button type="button" id="clearAllBtn" class="btn btn-outline-danger w-100">
+              <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
+              Clear all
+            </button>
+          </div>
+        </div>
+
+        <div class="border-top pt-3">
+          <p class="small fw-semibold text-secondary mb-2">Status</p>
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-sm btn-primary filter-btn active" data-filter="all">All</button>
+            <button type="button" class="btn btn-sm btn-outline-primary filter-btn" data-filter="Applied">Applied</button>
+            <button type="button" class="btn btn-sm btn-outline-warning filter-btn" data-filter="Interview">Interview</button>
+            <button type="button" class="btn btn-sm btn-outline-success filter-btn" data-filter="Offer">Offer</button>
+            <button type="button" class="btn btn-sm btn-outline-danger filter-btn" data-filter="Rejected">Rejected</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div id="emptyState" class="card border-0 shadow-sm rounded-4 text-center">
+      <div class="card-body py-5 px-4">
+        <div class="text-primary mb-3"><i class="bi bi-inbox display-4" aria-hidden="true"></i></div>
+        <p class="text-secondary mb-0">No jobs yet. Use <strong>Add New Job</strong> to start tracking.</p>
+      </div>
+    </div>
+
+    <!-- PROGRESS SECTION -->
+    <section id="progressSection" class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+      <div class="card-body p-3 p-md-4">
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mb-3">
+          <h5 class="mb-0 fw-semibold">Application Progress</h5>
+          <span class="badge text-bg-light border text-secondary">Live overview</span>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="small fw-semibold text-secondary mb-1">Applied</div>
+            <div class="progress" style="height: 0.75rem;">
+              <div id="progressApplied" class="progress-bar bg-primary rounded-end" role="progressbar"></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="small fw-semibold text-secondary mb-1">Interview</div>
+            <div class="progress" style="height: 0.75rem;">
+              <div id="progressInterview" class="progress-bar bg-warning rounded-end" role="progressbar"></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="small fw-semibold text-secondary mb-1">Offer</div>
+            <div class="progress" style="height: 0.75rem;">
+              <div id="progressOffer" class="progress-bar bg-success rounded-end" role="progressbar"></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="small fw-semibold text-secondary mb-1">Rejected</div>
+            <div class="progress" style="height: 0.75rem;">
+              <div id="progressRejected" class="progress-bar bg-danger rounded-end" role="progressbar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOB CARDS GRID -->
+    <div id="jobsGrid" class="row g-3 g-md-4"></div>
+
+  </main>
+
+  <!-- ADD / EDIT MODAL -->
+  <div class="modal fade" id="jobModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <div class="modal-content border-0 shadow rounded-4 overflow-hidden">
+        <div class="modal-header bg-primary text-white border-0 py-3">
+          <h5 class="modal-title fw-semibold mb-0" id="modalTitle">
+            <i class="bi bi-plus-circle me-2" aria-hidden="true"></i>
+            Add New Job
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+
+          <div class="mb-3">
+            <label class="form-label small fw-semibold" for="fieldCompany">Company name <span class="text-danger">*</span></label>
+            <input type="text" id="fieldCompany" class="form-control" placeholder="e.g. Systems Limited" autocomplete="organization"/>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-semibold" for="fieldRole">Role title <span class="text-danger">*</span></label>
+            <input type="text" id="fieldRole" class="form-control" placeholder="e.g. Frontend Intern" autocomplete="organization-title"/>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="fieldLocation">Location</label>
+              <input type="text" id="fieldLocation" class="form-control" placeholder="City / Remote"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold" for="fieldDate">Date applied <span class="text-danger">*</span></label>
+              <input type="date" id="fieldDate" class="form-control"/>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-semibold" for="fieldStatus">Status</label>
+            <select id="fieldStatus" class="form-select">
+              <option value="Applied">Applied</option>
+              <option value="Interview">Interview</option>
+              <option value="Offer">Offer</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-semibold" for="fieldInterviewDate">Next Interview (optional)</label>
+            <input type="date" id="fieldInterviewDate" class="form-control"/>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-semibold" for="fieldLink">Job post link</label>
+            <input type="url" id="fieldLink" class="form-control" placeholder="https://…"/>
+          </div>
+
+          <div class="mb-0">
+            <label class="form-label small fw-semibold" for="fieldNotes">Notes</label>
+            <textarea id="fieldNotes" class="form-control" rows="3" placeholder="HR contact, next steps, interview dates…"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer border-0 bg-body-secondary gap-2 py-3">
+          <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary px-4 fw-semibold" id="saveJobBtn">Save job</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Mode Toggle -->
+  <button id="darkModeToggle"
+    class="btn btn-dark position-fixed bottom-0 end-0 m-4 rounded-circle p-2 shadow-sm"
+    aria-label="Toggle dark mode">
+    🌙
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
